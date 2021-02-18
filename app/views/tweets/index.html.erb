@@ -1,8 +1,11 @@
 
 
-<h1>Tweets</h1>
+
 <% if user_signed_in? %>
- <button type="button" class="btn btn-warning"> <%=link_to 'New Tweet', new_tweet_path %> </button>
+     <button type="button" class="btn btn-warning"> <%=link_to 'New Tweet', new_tweet_path %> </button>
+
+<h1>Tweets</h1>
+
 <%end %>
 
 <% @tweets.each_slice(3) do |tweet_3|  %>
@@ -13,8 +16,14 @@
                         <div class="card">
                             <img src="<%= tweet.user.image%> " class="card-img-top" alt="...">
                             <div class="card-body">
-                                <h5 class="card-title"><%= tweet.user.name %></h5>
+                                <% if user_signed_in? %>
+                                    <h5 class="card-title"><%= tweet.user.name %></h5>
+                                <% end %>
                                 <p class="card-text"><%= tweet.content %></p>
+                                
+                                <%= link_to "likes #{tweet.likes.count}", root_path, :class=>"btn btn-success" %>
+                                <%= link_to "retweet #{tweet.retweet}", root_path, :class=>"btn btn-info" %>
+
                             </div>
                             <div class="card-footer">
                                 <small class="text-muted"><%= time_ago_in_words(tweet.created_at) %></small>
@@ -26,5 +35,6 @@
     </div>
 <%end %>
 
+<%= paginate @tweets, param_name: 'mostrar más tweets' %>
 
 
