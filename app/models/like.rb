@@ -1,3 +1,3 @@
 class Like < ApplicationRecord
-    has_many :tweets
+    belongs_to :tweet
 end

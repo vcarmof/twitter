@@ -1,14 +1,16 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Content:</strong>
-  <%= @tweet.content %>
-</p>
+<div class="card">
+    <%= link_to(image_tag(@tweet.user.image)) %>
+    <div class="card-body">
+      <h5 class="card-title"><%= @tweet.user.name%></h5>
+      <p class="card-text"><%= @tweet.content %>.</p>
+      <p class="card-text"><small class="text-muted"><%= @tweet.likes.count%></small></p>
+      <button type="button" class="btn btn-primary">like</button>
+      <button type="button" class="btn btn-success">retweet</button>
 
-<p>
-  <strong>Retweet:</strong>
-  <%= @tweet.retweet %>
-</p>
+    </div>
+  </div>
 
 <%= link_to 'Edit', edit_tweet_path(@tweet) %> |
 <%= link_to 'Back', tweets_path %>

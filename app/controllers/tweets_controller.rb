@@ -14,6 +14,7 @@ class TweetsController < ApplicationController
   # GET /tweets/new
   def new
     @tweet = Tweet.new
+  
   end
 
   # GET /tweets/1/edit
@@ -23,6 +24,9 @@ class TweetsController < ApplicationController
   # POST /tweets or /tweets.json
   def create
     @tweet = Tweet.new(tweet_params)
+    @tweet.user_id = current_user.id
+    
+
 
     respond_to do |format|
       if @tweet.save
@@ -65,6 +69,6 @@ class TweetsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def tweet_params
-      params.require(:tweet).permit(:content, :retweet)
+      params.require(:tweet).permit(:content, :retweet, :id_user, :id_like)
     end
 end
