@@ -8,6 +8,8 @@ class LikesController < ApplicationController
 
   def create
     @like = Like.new(like_params)
+    @like.user_id = current_user.id
+
     @like.save
   end
 
@@ -20,6 +22,6 @@ class LikesController < ApplicationController
 
   private
   def like_params
-    params.require(:like).permit(:like)
+    params.require(:like).permit(:like, :tweet_id)
   end
 end

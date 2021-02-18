@@ -6,10 +6,19 @@ class TweetsController < ApplicationController
   def index
     #@tweets = Tweet.all
     @tweets = Tweet.order(:created_at).page
+  end
+
+
+  def retweet
+      tw= Tweet.find(params[:id])
+      tweet = Tweet.new(tw)
+      tweet.content = tw.content
+    create()
+
+  end
     
 
 
-  end
 
   # GET /tweets/1 or /tweets/1.json
   def show
@@ -73,6 +82,6 @@ class TweetsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def tweet_params
-      params.require(:tweet).permit(:content, :retweet, :id_user, :id_like)
+      params.require(:tweet).permit(:content, :retweet, :id_user)
     end
 end

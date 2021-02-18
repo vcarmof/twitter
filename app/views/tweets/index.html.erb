@@ -19,10 +19,12 @@
                                 <% if user_signed_in? %>
                                     <h5 class="card-title"><%= tweet.user.name %></h5>
                                 <% end %>
+
                                 <p class="card-text"><%= tweet.content %></p>
+
                                 
-                                <%= link_to "likes #{tweet.likes.count}", root_path, :class=>"btn btn-success" %>
-                                <%= link_to "retweet #{tweet.retweet}", root_path, :class=>"btn btn-info" %>
+                               <%= link_to 'like'  %>
+                               
 
                             </div>
                             <div class="card-footer">
