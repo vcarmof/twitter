@@ -7,6 +7,7 @@ class TweetsController < ApplicationController
     #@tweets = Tweet.all
     @tweets = Tweet.order(created_at: :DESC).page
     @tweet = Tweet.new
+    
   end
 
 
@@ -14,11 +15,7 @@ class TweetsController < ApplicationController
   
   end
  
-  def like
-    @tweet = Tweet.all.find(params[:id])
-    Like.create(user_id: current_user.id, tweet_id: @tweet.id)
-    redirect_to root_path
-  end
+
 
     
 

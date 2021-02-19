@@ -1,12 +1,8 @@
 Rails.application.routes.draw do
-  get 'like/index'
-  get 'like/new', to: 'like#new'
-  post 'like', to: 'like#create'
+  
  
-  post 'like/update'
-  get 'like/destroy'
 
-  put 'tweet/:id/like', 'tweet#like', as: 'like'
+ 
 
   resources :tweets do
     member do
@@ -14,6 +10,9 @@ Rails.application.routes.draw do
       post :retweet
     end
   end 
+
+  get 'tweet/:user_id/:tweet_id/like', to: 'likes#create', as: 'likes'
+  delete 'tweet/:user_id/:tweet_id/like', to: 'likes#destroy', as: 'likes_destroy'
 
   
 

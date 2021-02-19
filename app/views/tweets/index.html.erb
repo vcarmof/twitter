@@ -21,7 +21,20 @@
         <p class="card-text text-muted"><%= tw.original %></p>
     <%end %>
     <%= link_to 'retweet', retweet_tweet_path(tw) %> <br>
-    <%= link_to "LIKES #{tw.likes.count}", root_path %>
+
+    <p>LIKES  <%= tw.likes.count %></p>
+
+    <% if user_signed_in? && !Like.find_by(tweet_id: tw.id, user_id: current_user.id)%>
+
+        <%= link_to "like", likes_path(current_user.id, tw.id), :class=>"btn btn-primary" %>
+    
+    <%elsif user_signed_in? %>
+
+        <%= link_to "dislike", likes_destroy_path(current_user.id, tw.id), method: :delete, :class=>"btn btn-primary" %>
+      
+    <% end %>   
+    <br>
+   
  
     
     <%= link_to time_ago_in_words(tw.created_at), tweet_path(tw), :class=>"text-muted" %>
