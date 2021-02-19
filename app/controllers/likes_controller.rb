@@ -7,10 +7,14 @@ class LikesController < ApplicationController
   end
 
   def create
-    @like = Like.new(like_params)
-    @like.user_id = current_user.id
+    params[:like][:user_id] = current_user.id
+    @like = like.new(likes_params)
+    if @like.save
+      redirect_to root_path
+    end
+    
 
-    @like.save
+   
   end
 
   def update
@@ -22,6 +26,6 @@ class LikesController < ApplicationController
 
   private
   def like_params
-    params.require(:like).permit(:like, :tweet_id)
+    params.require(:like).permit(:like, :tweet_id, :user_id)
   end
 end

@@ -2,41 +2,32 @@
 
 
 <% if user_signed_in? %>
-     <button type="button" class="btn btn-warning"> <%=link_to 'New Tweet', new_tweet_path %> </button>
+    <%= render "form", tweet: @tweet %>
+<%end %>
+     
 
 <h1>Tweets</h1>
 
+
+<% @tweets.each do |tw|  %>
+ <div class="card mb-3">
+  <img src="<%= tw.user.image %>" class="img-thumbnail", width="100" > 
+  <div class="card-body">
+  <%if user_signed_in? %>
+    <h5 class="card-title"><%= tw.user.name %></h5>
+  <%end %>
+    <p class="card-text"><%= tw.content %></p>
+    <% if tw.original != "" %>
+        <p class="card-text text-muted"><%= tw.original %></p>
+    <%end %>
+    <%= link_to 'retweet', retweet_tweet_path(tw) %> <br>
+    <%= link_to "LIKES #{tw.likes.count}", root_path %>
+ 
+    
+    <%= link_to time_ago_in_words(tw.created_at), tweet_path(tw), :class=>"text-muted" %>
+  </div>
+</div>
 <%end %>
 
-<% @tweets.each_slice(3) do |tweet_3|  %>
-    <div class="card-deck my-5">
-        <div class="row w-100">
-                <%tweet_3.each do |tweet|  %>
-                    <div class="col-md-4">
-                        <div class="card">
-                            <img src="<%= tweet.user.image%> " class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <% if user_signed_in? %>
-                                    <h5 class="card-title"><%= tweet.user.name %></h5>
-                                <% end %>
-
-                                <p class="card-text"><%= tweet.content %></p>
-
-                                
-                               <%= link_to 'like'  %>
-                               
-
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted"><%= time_ago_in_words(tweet.created_at) %></small>
-                            </div>
-                        </div>
-                    </div>
-              <%end %>
-        </div>
-    </div>
-<%end %>
-
-<%= paginate @tweets, param_name: 'mostrar más tweets' %>
-
+<%= paginate @tweets%>
 

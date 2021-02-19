@@ -26,13 +26,13 @@ ActiveRecord::Schema.define(version: 2021_02_18_200837) do
   end
 
   create_table "tweets", force: :cascade do |t|
-    t.string "content"
-    t.boolean "retweet"
+    t.text "content"
+    t.integer "retweet"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.bigint "tweet_id"
-    t.string "original"
+    t.text "original"
     t.index ["tweet_id"], name: "index_tweets_on_tweet_id"
     t.index ["user_id"], name: "index_tweets_on_user_id"
   end

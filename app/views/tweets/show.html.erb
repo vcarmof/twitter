@@ -1,16 +1,19 @@
 <p id="notice"><%= notice %></p>
 
-<div class="card">
-    <%= link_to(image_tag(@tweet.user.image)) %>
+ <div class="card mb-3">
+    <img src="<%= @tweet.user.image %>" class="img-thumbnail", width="200" > 
     <div class="card-body">
-      <h5 class="card-title"><%= @tweet.user.name%></h5>
-      <p class="card-text"><%= @tweet.content %>.</p>
-      <p class="card-text"><small class="text-muted"><%= @tweet.likes.count%></small></p>
-      <button type="button" class="btn btn-primary">like</button>
-      <button type="button" class="btn btn-success">retweet</button>
+      <h5 class="card-title"><%= @tweet.user.name %></h5>
+      <p class="card-text"><%= @tweet.content %></p>
+      <% if @tweet.original != "" %>
+          <p class="card-text text-muted"><%= @tweet.original %></p>
+      <%end %>
+      
 
+      <%= link_to time_ago_in_words(@tweet.created_at), :class=>"text-muted" %>
     </div>
   </div>
+
 
 <%= link_to 'Edit', edit_tweet_path(@tweet) %> |
 <%= link_to 'Back', tweets_path %>
