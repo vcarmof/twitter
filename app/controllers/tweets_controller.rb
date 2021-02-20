@@ -1,5 +1,5 @@
 class TweetsController < ApplicationController
-  before_action :authenticate_user!, only: [ :new, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [ :new, :edit, :update, :destroy, :retweet]
   before_action :set_tweet, only: %i[ show edit update destroy retweet  ]
 
   # GET /tweets or /tweets.json
