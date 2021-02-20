@@ -10,41 +10,41 @@
 
 
 <% @tweets.each do |tw|  %>
- <div class="card mb-3">
-  <img src="<%= tw.user.image %>" class="img-thumbnail", width="100" > 
-  <div class="card-body">
-  <%if user_signed_in? %>
-    <h5 class="card-title"><%= tw.user.name %></h5>
-  <%end %>
-    <p class="card-text"><%= tw.content %></p>
-    <% if tw.original != "" %>
-        <p class="card-text text-muted"><%= tw.original %></p>
-    <%end %>
-    
+  <div class="card mb-3">
+      <img src="<%= tw.user.image %>" class="img-thumbnail", width="100" > 
+      <div class="card-body">
+      <%if user_signed_in? %>
+        <h5 class="card-title"><%= tw.user.name %></h5>
+      <%end %>
+        <p class="card-text"><%= tw.content %></p>
+        <% if tw.original != "" %>
+            <p class="card-text text-muted"><%= tw.original %></p>
+        <%end %>
+        
 
-    <p>likes  <%= tw.likes.count %></p>
-    <p>rt <%=Tweet.where(tweet_id: tw).count %></p>
+        <p>likes  <%= like_count(tw) %></p>
+        <p>rt <%=rt_count(tw)%></p>
 
-    <% if user_signed_in? && !Like.find_by(tweet_id: tw.id, user_id: current_user.id)%>
+        <% if user_signed_in? && !Like.find_by(tweet_id: tw.id, user_id: current_user.id)%>
 
-        <%= link_to "like", likes_path(current_user.id, tw.id), :class=>"btn btn-primary" %>
-        <%= link_to 'retweet', retweet_tweet_path(tw.id), :class=>"btn btn-info" %> <br>
-    
-    <%elsif user_signed_in? %>
+            <%= link_to "like", likes_path(current_user.id, tw.id), :class=>"btn btn-primary" %>
+            <%= link_to 'retweet', retweet_tweet_path(tw.id), :class=>"btn btn-info" %> <br>
+        
+        <%elsif user_signed_in? %>
 
-        <%= link_to "dislike", likes_destroy_path(current_user.id, tw.id), method: :delete, :class=>"btn btn-danger" %>
-        <%= link_to 'retweet', retweet_tweet_path(tw.id), :class=>"btn btn-info" %> <br>
+            <%= link_to "dislike", likes_destroy_path(current_user.id, tw.id), method: :delete, :class=>"btn btn-danger" %>
+            <%= link_to 'retweet', retweet_tweet_path(tw.id), :class=>"btn btn-info" %> <br>
+          
+        <% end %>   
+          
+          
+        <br>
       
-    <% end %>   
-      
-      
-    <br>
-   
- 
     
-    <%= link_to time_ago_in_words(tw.created_at), tweet_path(tw), :class=>"text-muted" %>
+        
+        <%= link_to time_ago_in_words(tw.created_at), tweet_path(tw), :class=>"text-muted" %>
+      </div>
   </div>
-</div>
 <%end %>
 
 <div>
