@@ -6,8 +6,8 @@ Rails.application.routes.draw do
 
   resources :tweets do
     member do
-      get :retweet
-      post :retweet
+      get 'retweet', to: 'tweets#rt', as: 'retweet'
+      post 'retweet', to: 'tweets#retweet'
     end
   end 
 

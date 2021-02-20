@@ -1,20 +1,38 @@
 class TweetsController < ApplicationController
   before_action :authenticate_user!, only: [ :new, :edit, :update, :destroy]
-  before_action :set_tweet, only: %i[ show edit update destroy retweet ]
+  before_action :set_tweet, only: %i[ show edit update destroy  ]
 
   # GET /tweets or /tweets.json
   def index
     #@tweets = Tweet.all
-    @tweets = Tweet.order(created_at: :DESC).page
+    @tweets = Tweet.order(created_at: :DESC).page params[:page]
     @tweet = Tweet.new
     
   end
 
 
-  def retweet
+  def rt
+    @tweet = Tweet.new
   
   end
  
+
+  def retweet
+   @ret = Tweet.new
+   
+   
+  
+
+    respond_to do |format|
+      if @ret.save
+        format.html { redirect_to @tweet, notice: "Tweet was successfully created." }
+        format.json { render :show, status: :created, location: @tweet }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @tweet.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
 
     
@@ -86,6 +104,6 @@ class TweetsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def tweet_params
-      params.require(:tweet).permit(:content, :original, :tweet_id, :id_user)
+      params.require(:tweet).permit(:content, :original, :tweet_id)
     end
 end

@@ -20,9 +20,10 @@
     <% if tw.original != "" %>
         <p class="card-text text-muted"><%= tw.original %></p>
     <%end %>
-    <%= link_to 'retweet', retweet_tweet_path(tw) %> <br>
+    
 
     <p>LIKES  <%= tw.likes.count %></p>
+    <p>RT <%= tw.retweet %></p>
 
     <% if user_signed_in? && !Like.find_by(tweet_id: tw.id, user_id: current_user.id)%>
 
@@ -30,9 +31,10 @@
     
     <%elsif user_signed_in? %>
 
-        <%= link_to "dislike", likes_destroy_path(current_user.id, tw.id), method: :delete, :class=>"btn btn-primary" %>
+        <%= link_to "dislike", likes_destroy_path(current_user.id, tw.id), method: :delete, :class=>"btn btn-danger" %>
       
     <% end %>   
+      <%= link_to 'retweet', retweet_tweet_path(tw.id), :class=>"btn btn-info" %> <br>
     <br>
    
  
@@ -42,5 +44,9 @@
 </div>
 <%end %>
 
-<%= paginate @tweets%>
+<div>
+  <%= link_to_next_page @tweets, 'mostrar más tweets'%> <br>
+  <%= link_to_previous_page @tweets, 'retroceder' %>
+
+</div>
 
