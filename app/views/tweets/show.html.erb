@@ -19,7 +19,7 @@
         <%elsif user_signed_in? %>
 
             <%= link_to "dislike", likes_destroy_path(current_user.id, @tweet.id), method: :delete, :class=>"btn btn-danger" %>
-            <%= link_to 'retweet', retweet_tweet_path(tw.id), :class=>"btn btn-info" %> 
+            <%= link_to 'retweet', retweet_tweet_path(@tweet.id), :class=>"btn btn-info" %> 
 
         <% end %>   
        
