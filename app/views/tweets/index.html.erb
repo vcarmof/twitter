@@ -22,19 +22,22 @@
     <%end %>
     
 
-    <p>LIKES  <%= tw.likes.count %></p>
-    <p>RT <%= tw.retweet %></p>
+    <p>likes  <%= tw.likes.count %></p>
+    <p>rt <%=Tweet.where(tweet_id: tw).count %></p>
 
     <% if user_signed_in? && !Like.find_by(tweet_id: tw.id, user_id: current_user.id)%>
 
         <%= link_to "like", likes_path(current_user.id, tw.id), :class=>"btn btn-primary" %>
+        <%= link_to 'retweet', retweet_tweet_path(tw.id), :class=>"btn btn-info" %> <br>
     
     <%elsif user_signed_in? %>
 
         <%= link_to "dislike", likes_destroy_path(current_user.id, tw.id), method: :delete, :class=>"btn btn-danger" %>
+        <%= link_to 'retweet', retweet_tweet_path(tw.id), :class=>"btn btn-info" %> <br>
       
     <% end %>   
-      <%= link_to 'retweet', retweet_tweet_path(tw.id), :class=>"btn btn-info" %> <br>
+      
+      
     <br>
    
  
