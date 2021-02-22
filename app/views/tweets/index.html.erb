@@ -1,9 +1,13 @@
-
+<%= form_tag(root_path, method: :get) do %>
+    <%=text_field_tag :q  %>
+    <%= submit_tag 'Buscar tweets' %>
+<%end  %>
 
 
 <% if user_signed_in? %>
     <%= render "form", tweet: @tweet %>
 <%end %>
+
      
 
 <h1 class="text-white">Tweets</h1>

@@ -4,13 +4,23 @@ class TweetsController < ApplicationController
 
   # GET /tweets or /tweets.json
   def index
-    list_friends()
+
+    @tweets = Tweet.tweets_for_me(list_friends()).order(created_at: :DESC).page params[:page]
+  
+    if params[:q] #REEMPLAZA A RANSACK PARA BUSCAR
+      @tweets = Tweet.where('content LIKE ?', "%#{params[:q]}%").order(created_at: :DESC).page params[:page]
+
+    end
+        
+      
+    
+
    
     
      
    
   #SOLO APARECERÁN LOS TWEETS A LOS QUE SIGUE EL CURREN USER
-   @tweets = Tweet.tweets_for_me(list_friends).order(created_at: :DESC).page params[:page]
+   #@tweets = Tweet.tweets_for_me(list_friends()).order(created_at: :DESC).page params[:page]
    #@tweets = Tweet.order(created_at: :DESC).page params[:page]
   
    
