@@ -13,14 +13,13 @@
 
   
 
-  <div class="field">
+  <div class="field container  ">
     <%= form.label :content %>
-    <%= form.text_area :content %>
+    <%= form.text_area :content, size: "50x4", :class=>"align-middle mx-5"  %>
+    <%= form.submit %>
   </div>
 
  
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+
 <% end %>
