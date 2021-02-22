@@ -3,7 +3,7 @@ Rails.application.routes.draw do
  
 
  
-
+  get "show_users", to: "tweets#show_user"
  
   resources :tweets do
     member do

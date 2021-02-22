@@ -1,5 +1,5 @@
 class TweetsController < ApplicationController
-  before_action :authenticate_user!, only: [ :new, :edit, :update, :destroy, :retweet]
+  before_action :authenticate_user!, only: [ :new, :edit, :update, :destroy, :retweet, :show_user]
   before_action :set_tweet, only: %i[ show edit update destroy retweet  ]
 
   # GET /tweets or /tweets.json
@@ -48,7 +48,9 @@ class TweetsController < ApplicationController
 
 
     
-
+def show_user
+  @users = User.all
+end
 
     
 
@@ -114,11 +116,13 @@ class TweetsController < ApplicationController
 
 
   def list_friends ()
-    friends = Friend.where(user_id: current_user.id )
-    list = []
-    friends.each do |friend|
-        list.push(friend.friend_id)
+    if user_signed_in?
+      friends = Friend.where(user_id: current_user.id )
+      list = []
+      friends.each do |friend|
+          list.push(friend.friend_id)
 
+      end
     end
     return list
 

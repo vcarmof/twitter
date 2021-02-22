@@ -32,6 +32,7 @@
           
           <%if user_signed_in? %>
             <%= link_to "Cerrar sesión", destroy_user_session_path, method: :delete, :class=>"nav-link text-white"  %> 
+            <%= link_to "Users", show_users_path, :class=>"nav-link text-white" %>
           <%else %>
             <%=  link_to "Nueva cuenta", new_user_registration_path, :class=>"nav-link text-white" %> 
            <%= link_to 'Iniciar sesión', new_user_session_path, :class=>"nav-link text-white"   %>
