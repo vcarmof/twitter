@@ -31,22 +31,21 @@
   </div>
 
 
-<%= link_to 'Edit', edit_tweet_path(@tweet) %> |
-<%= link_to 'Back', tweets_path %> <br>
+<%= link_to 'Edit', edit_tweet_path(@tweet), :class=>"text-white" %> |
+<%= link_to 'Back', tweets_path , :class=>"text-white"%> <br>
 <br>
 
 
-<h4>LIKES</h4>
+<h4 class="text-white">LIKES</h4>
 <% @likes.each do |like| %>
-   <div class="card mb-3">
+   <div class="card mb-2">
    
     <img src="<%= like.user.image %>" class="img-thumbnail", width="100" > 
   
     <div class="card-body">
       <% if user_signed_in? %>
-        <h5 class="card-title"><%= like.user.name%></h5>
+        <h5 class="card-title text-uppercase"> <%= like.user.name%></h5>
       <%end %>
-      <p class="card-text"><%=  %></p>
   </div>
   </div>
       

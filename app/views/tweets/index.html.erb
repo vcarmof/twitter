@@ -6,15 +6,17 @@
 <%end %>
      
 
-<h1>Tweets</h1>
+<h1 class="text-white">Tweets</h1>
 
 
 <% @tweets.each do |tw|  %>
+
+
   <div class="card mb-3">
       <img src="<%= tw.user.image %>" class="img-thumbnail", width="100" > 
       <div class="card-body">
       <%if user_signed_in? %>
-        <h5 class="card-title"><%= tw.user.name %></h5>
+        <h5 class="card-title text-uppercase"><%= tw.user.name %></h5>
       <%end %>
         <p class="card-text"><%= tw.content %></p>
         <% if tw.original != "" %>
@@ -25,22 +27,25 @@
         <p>likes  <%= like_count(tw) %></p>
         <p>rt <%=rt_count(tw)%></p>
 
-        <% if user_signed_in? && !Like.find_by(tweet_id: tw.id, user_id: current_user.id)%>
+        <div class="">
+            <% if user_signed_in? && !Like.find_by(tweet_id: tw.id, user_id: current_user.id)%>
 
-            <%= link_to "like", likes_path(current_user.id, tw.id), :class=>"btn btn-primary" %>
-            <%= link_to 'retweet', retweet_tweet_path(tw.id), :class=>"btn btn-info" %> 
-        
-        <%elsif user_signed_in? %>
+                <%= link_to "like", likes_path(current_user.id, tw.id), :class=>"btn btn-primary" %>
+                <%= link_to 'retweet', retweet_tweet_path(tw.id), :class=>"btn btn-info" %> 
+            
+            <%elsif user_signed_in? %>
 
-            <%= link_to "dislike", likes_destroy_path(current_user.id, tw.id), method: :delete, :class=>"btn btn-danger" %>
-            <%= link_to 'retweet', retweet_tweet_path(tw.id), :class=>"btn btn-info" %> 
+                <%= link_to "dislike", likes_destroy_path(current_user.id, tw.id), method: :delete, :class=>"btn btn-danger" %>
+                <%= link_to 'retweet', retweet_tweet_path(tw.id), :class=>"btn btn-info" %> 
 
-        <% end %>   
-       
-        <% if user_signed_in? && tw.user_id == current_user.id %>
-          <%= link_to 'delete', tw, method: :delete, :class=>"btn btn-warning" %>
-        
-        <% end %>   
+            <% end %>   
+          
+            <% if user_signed_in? && tw.user_id == current_user.id %>
+              <%= link_to 'delete', tw, method: :delete, :class=>"btn btn-warning" %>
+            
+            <% end %>   
+
+        </div>
 
           
           
@@ -55,8 +60,8 @@
 <%end %>
 
 <div>
-  <%= link_to_next_page @tweets, 'mostrar más tweets'%> <br>
-  <%= link_to_previous_page @tweets, 'retroceder' %>
+  <%= link_to_next_page @tweets, 'mostrar más tweets', :class=>"text-white"%> <br>
+  <%= link_to_previous_page @tweets, 'retroceder', :class=>"text-white" %>
 
 </div>
 
