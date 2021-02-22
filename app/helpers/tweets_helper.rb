@@ -7,4 +7,6 @@ module TweetsHelper
    def like_count(tweet)
     tweet.likes.count
    end
+
+
 end

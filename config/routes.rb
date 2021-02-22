@@ -14,7 +14,8 @@ Rails.application.routes.draw do
   get 'tweet/:user_id/:tweet_id/like', to: 'likes#create', as: 'likes'
   delete 'tweet/:user_id/:tweet_id/like', to: 'likes#destroy', as: 'likes_destroy'
 
-  get 'friend/:current_id/:friend_id', to: 'friends#create', as: 'friends_follow'
+  get 'friends/:current_id/:friend_id', to: 'friends#create', as: 'friends_follow'
+  delete 'friends/:current_id/:friend_id', to: 'friends#destroy', as: 'friends_unfollow'
 
 
   

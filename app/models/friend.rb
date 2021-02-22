@@ -1,4 +1,4 @@
 class Friend < ApplicationRecord
-    belongs_to :user
-    has_many :friends
+    belongs_to :user, foreign_key: :user_id
+
 end

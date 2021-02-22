@@ -46,9 +46,13 @@
             
             <% end %>   
 
-            <% if user_signed_in? && current_user.id != tw.user_id %>
+            <% if user_signed_in? && current_user.id != tw.user_id  && !Friend.find_by(user_id: current_user.id, friend_id: tw.user_id )%>
                 <%= link_to 'follow', friends_follow_path(current_user.id, tw.user_id), :class=>"btn btn-success" %> 
               
+
+            <%elsif user_signed_in? && current_user.id != tw.user_id  && Friend.find_by(user_id: current_user.id, friend_id: tw.user_id ) %>
+              <%= link_to 'unfollow', friends_unfollow_path(current_user.id, tw.user_id), method: :delete, :class=>"btn btn-danger" %> 
+           
             <% end %>
 
         </div>

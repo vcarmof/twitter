@@ -8,6 +8,14 @@ class Tweet < ApplicationRecord
     paginates_per 50
 
 
+   
+   scope :tweets_for_me, ->(list) {where(user_id: list)}
+   
+
+
+    
+    
+
     
 
     

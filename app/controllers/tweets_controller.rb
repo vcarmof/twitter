@@ -4,9 +4,17 @@ class TweetsController < ApplicationController
 
   # GET /tweets or /tweets.json
   def index
-    #@tweets = Tweet.all
-    @tweets = Tweet.order(created_at: :DESC).page params[:page]
-    @tweet = Tweet.new
+    list_friends()
+   
+    
+     
+   
+  #SOLO APARECERÁN LOS TWEETS A LOS QUE SIGUE EL CURREN USER
+   @tweets = Tweet.tweets_for_me(list_friends).order(created_at: :DESC).page params[:page]
+   #@tweets = Tweet.order(created_at: :DESC).page params[:page]
+  
+   
+   @tweet = Tweet.new
     
   end
 
@@ -101,6 +109,19 @@ class TweetsController < ApplicationController
       format.html { redirect_to tweets_url, notice: "Tweet was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+
+
+  def list_friends ()
+    friends = Friend.where(user_id: current_user.id )
+    list = []
+    friends.each do |friend|
+        list.push(friend.friend_id)
+
+    end
+    return list
+
   end
 
   private
