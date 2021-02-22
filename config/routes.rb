@@ -4,6 +4,10 @@ Rails.application.routes.draw do
 
  
 
+  get 'friend/index'
+  get 'friend/new'
+  get 'friend/create'
+  get 'friend/destroy'
   resources :tweets do
     member do
       get 'retweet', to: 'tweets#retweet', as: 'retweet'
