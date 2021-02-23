@@ -3,13 +3,18 @@
  <div class="card mb-3">
     <img src="<%= @tweet.user.image %>" class="img-thumbnail", width="200" > 
     <div class="card-body">
+    <% if user_signed_in? %>
       <h5 class="card-title"><%= @tweet.user.name %></h5>
-      <p class="card-text"><%= @tweet.content %></p>
+      
+    <% end %>
+      
+      <!--p class="card-text"><%= @tweet.content %></p-->
+    
+
+
       <p>likes  <%= like_count(@tweet) %></p>
       <p>rt <%=rt_count(@tweet)%></p>
-      <% if @tweet.original != "" %>
-          <p class="card-text text-muted"><%= @tweet.original %></p>
-      <%end %>
+     
 
        <% if user_signed_in? && !Like.find_by(tweet_id: @tweet.id, user_id: current_user.id)%>
 

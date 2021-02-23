@@ -9,14 +9,15 @@
     
     <% @users.each do |u| %>
     <tr>
+        
         <td class= "text-white"><%= u.name %></td>
         <% if user_signed_in? && current_user.id != u.id  && !Friend.find_by(user_id: current_user.id, friend_id: u.id) %>
           <td><%= link_to "follow", friends_follow_path(current_user.id, u.id), :class=>"btn btn-success" %> </td>
         <%elsif user_signed_in? && current_user.id != u.id  && Friend.find_by(user_id: current_user.id, friend_id: u.id ) %>
-            <td><%= link_to 'unfollow', friends_unfollow_path(current_user.id, u.id), method: :delete, :class=>"btn btn-danger" %> </td> 
+            td><%= link_to 'unfollow', friends_unfollow_path(current_user.id, u.id), method: :delete, :class=>"btn btn-danger" %> </td> 
+        <% end %>
            
         
-        <% end %>
         
     </tr>
    <%end %>

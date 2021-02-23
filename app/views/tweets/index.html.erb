@@ -1,16 +1,20 @@
-<%= form_tag(root_path, method: :get) do %>
-    <%=text_field_tag :q  %>
-    <%= submit_tag 'Buscar tweets' %>
-<%end  %>
+
 
 
 <% if user_signed_in? %>
+    <%= form_tag(root_path, method: :get) do %>
+        <%=text_field_tag :q  %>
+        <%= submit_tag 'Buscar tweets' %>
+    <%end  %>
+
     <%= render "form", tweet: @tweet %>
+    
+    <h1 class="text-white">Tweets</h1>
 <%end %>
 
      
 
-<h1 class="text-white">Tweets</h1>
+
 
 
 <% @tweets.each do |tw|  %>
@@ -23,10 +27,6 @@
         <h5 class="card-title text-uppercase"><%= tw.user.name %></h5>
       <%end %>
         <p class="card-text"><%= tw.content %></p>
-        <% if tw.original != "" %>
-            <p class="card-text text-muted"><%= tw.original %></p>
-        <%end %>
-        
 
         <p>likes  <%= like_count(tw) %></p>
         <p>rt <%=rt_count(tw)%></p>

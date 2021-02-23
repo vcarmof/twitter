@@ -69,9 +69,9 @@ end
   # GET /tweets/1 or /tweets/1.json
   def show
    @likes = Like.where(tweet_id: @tweet)
-   
-   
   end
+   
+   
 
   # GET /tweets/new
   def new
@@ -87,6 +87,18 @@ end
   def create
     @tweet = Tweet.new(tweet_params)
     @tweet.user_id = current_user.id
+
+  
+
+   
+   
+  
+
+  
+   
+   
+
+
     
 
 
