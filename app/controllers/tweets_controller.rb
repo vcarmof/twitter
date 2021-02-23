@@ -11,14 +11,7 @@ class TweetsController < ApplicationController
       @tweets = Tweet.where('content LIKE ?', "%#{params[:q]}%").order(created_at: :DESC).page params[:page]
 
     end
-        
-      
-    
-
-   
-    
-     
-   
+  
   #SOLO APARECERÁN LOS TWEETS A LOS QUE SIGUE EL CURREN USER
    #@tweets = Tweet.tweets_for_me(list_friends()).order(created_at: :DESC).page params[:page]
    #@tweets = Tweet.order(created_at: :DESC).page params[:page]
