@@ -9,6 +9,21 @@ module TweetsHelper
    end
 
 
+  #  def array_hash(content)
+  #       array = content.split(" ")
+  #       final = []
+  #       array.each do |w|
+  #         if w[0].include?("#")
+  #           final.push( )
+  #         end
+  #       end 
+  #     end
+            
+      
+          
+    
+
+
   
    
 
