@@ -26,7 +26,11 @@
       <%if user_signed_in? %>
         <h5 class="card-title text-uppercase"><%= tw.user.name %></h5>
       <%end %>
-        <p class="card-text"><%= tw.content %></p>
+        <!--p class="card-text"><%= tw.content %></p-->
+
+        <p><%= to_hashtag(tw) %></p>
+
+       
 
 
       
