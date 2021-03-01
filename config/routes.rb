@@ -11,7 +11,9 @@ Rails.application.routes.draw do
 
 
 
+  get 'api/news', to: 'apis#index'
 
+  get 'api/:date_1/:date_2', to: 'apis#date'
   
   get "show_users", to: "tweets#show_user"
  
