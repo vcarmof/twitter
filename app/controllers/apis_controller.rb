@@ -1,6 +1,6 @@
 class ApisController < ApplicationController
-    include ActionController::HttpAuthentication::Basic::ControllerMethods
-    http_basic_authenticate_with name: "prueba", password: "pass" #, except: :index
+    #include ActionController::HttpAuthentication::Basic::ControllerMethods
+    #http_basic_authenticate_with name: "prueba", password: "pass", only: :create
 
     def index
         @tweets = Tweet.all.order(created_at: :DESC)
@@ -17,7 +17,20 @@ class ApisController < ApplicationController
             end
         end
 
-        render json: filter.to_json
+        render json: filter.to_json(only: [:id, :content, :user_id, :tweet_id])
 
     end
+
+
+    def create
+        @tweet = Tweet.new(tweet_params())
+        if @tweet.save
+            redirect_to api_news_path
+        end
+    end
+
+    private
+    def tweet_params
+        params.require(:tweet).permit(:content)
+      end
 end
